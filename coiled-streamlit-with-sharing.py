@@ -34,7 +34,7 @@ def get_client():
         n_workers=10,
         name="coiled-streamlit",
         software="coiled-examples/streamlit",
-        account=st.secrets("coiled_account"),
+        account=st.secrets["coiled_account"],
     )
     client = Client(cluster)
     return client
