@@ -27,14 +27,17 @@ num_passengers = st.slider("Number of passengers", 0, 9, (0, 9))
 # Start and connect to Coiled cluster
 cluster_state = st.empty()
 
-@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
+
+@st.cache():
+dask.config.set({"coiled_token":st.secrets["coiled_token"]})
+
+@st.cache(allow_output_mutation=True)
 def get_client():
     cluster_state.write("Starting or connecting to Coiled cluster...")
     cluster = coiled.Cluster(
         n_workers=10,
         name="coiled-streamlit",
         software="coiled-examples/streamlit",
-        account=st.secrets["coiled_account"],
     )
     client = Client(cluster)
     return client
