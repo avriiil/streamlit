@@ -3,6 +3,7 @@ import dask
 import dask.dataframe as dd
 import folium
 import streamlit as st
+import os
 from dask.distributed import Client
 from folium.plugins import HeatMap
 from streamlit_folium import folium_static
@@ -19,6 +20,8 @@ st.write(
     then let Coiled handle all of the infrastructure and compute.
     """
 )
+
+st.write(os.environ["DASK_COILED__TOKEN"])
 
 # Interactive widgets in Streamlit
 taxi_mode = st.selectbox("Taxi pickup or dropoff?", ("Pickups", "Dropoffs"))
