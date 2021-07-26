@@ -21,8 +21,6 @@ st.write(
     """
 )
 
-st.write(os.environ["DASK_COILED__TOKEN"])
-
 # Interactive widgets in Streamlit
 taxi_mode = st.selectbox("Taxi pickup or dropoff?", ("Pickups", "Dropoffs"))
 num_passengers = st.slider("Number of passengers", 0, 9, (0, 9))
@@ -33,7 +31,7 @@ cluster_state = st.empty()
 @st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
 def get_client():
     cluster_state.write("Starting or connecting to Coiled cluster...")
-    dask.config.set({"coiled_token":st.secrets["token"]})
+    dask.config.set({"coiled_token":os.environ["DASK_COILED__TOKEN"]})
     cluster = coiled.Cluster(
         n_workers=10,
         name="coiled-streamlit",
