@@ -7,7 +7,6 @@ from dask.distributed import Client
 from folium.plugins import HeatMap
 from streamlit_folium import folium_static
 
-!coiled login --token st.secrets('coiled_token')
 
 # Text in Streamlit
 st.header("Coiled and Streamlit")
@@ -34,7 +33,8 @@ def get_client():
     cluster = coiled.Cluster(
         n_workers=10,
         name="coiled-streamlit",
-        software="coiled-examples/streamlit"
+        software="coiled-examples/streamlit",
+        account=st.secrets("coiled_account"),
     )
     client = Client(cluster)
     return client
