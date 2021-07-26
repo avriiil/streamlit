@@ -29,8 +29,8 @@ cluster_state = st.empty()
 
 @st.cache(allow_output_mutation=True)
 def get_client():
-	dask.config.set({"coiled_token":st.secrets["coiled_token"]})
     cluster_state.write("Starting or connecting to Coiled cluster...")
+    dask.config.set({"coiled_token":st.secrets["coiled_token"]})
     cluster = coiled.Cluster(
         n_workers=10,
         name="coiled-streamlit",
