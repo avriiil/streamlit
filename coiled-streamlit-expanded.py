@@ -7,8 +7,6 @@ from dask.distributed import Client
 from folium.plugins import HeatMap
 from streamlit_folium import folium_static
 
-!coiled login --token st.secrets('coiled_token')
-
 # Text in Streamlit
 st.header("Coiled and Streamlit")
 st.subheader("Analyzing Large Datasets with Coiled and Streamlit")
