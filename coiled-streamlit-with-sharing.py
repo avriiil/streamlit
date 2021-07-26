@@ -27,10 +27,11 @@ num_passengers = st.slider("Number of passengers", 0, 9, (0, 9))
 # Start and connect to Coiled cluster
 cluster_state = st.empty()
 
-dask.config.set({"coiled_token":st.secrets["coiled_token"]})
+
 
 @st.cache(allow_output_mutation=True)
 def get_client():
+	dask.config.set({"coiled_token":st.secrets["coiled_token"]})
     cluster_state.write("Starting or connecting to Coiled cluster...")
     cluster = coiled.Cluster(
         n_workers=10,
